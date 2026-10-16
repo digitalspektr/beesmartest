@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeeSmartest | قاعدة خلية النحل الذكية</title>
+    <!-- استدعاء خط عربي احترافي من Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- مكتبة أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #f59e0b; /* لون العسل الذهبي */
+            --primary-dark: #d97706;
+            --secondary-color: #10b981; /* أخضر طبيعي */
+            --dark-bg: #1e293b;
+            --light-bg: #f8fafc;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* القائمة العلوية */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-main {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.6rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-main:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* القسم الرئيسي (Hero Section) */
+        .hero {
+            padding: 8rem 2rem 5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            color: var(--dark-bg);
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hero-image-box {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            border: 4px solid var(--white);
+            background-color: #e2e8f0;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-image-box img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* قسم المميزات */
+        .features {
+            padding: 5rem 2rem;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark-bg);
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-bottom: 4px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(245, 158, 11, 0.15);
+            color: var(--primary-dark);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* قسم المحاكاة الحية (شاشة القاعدة + التطبيق) */
+        .live-demo {
+            padding: 5rem 2rem;
+            background-color: var(--dark-bg);
+            color: var(--white);
+        }
+
+        .live-demo .section-title h2 {
+            color: var(--white);
+        }
+
+        .live-demo .section-title p {
+            color: #94a3b8;
+        }
+
+        .demo-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        /* محاكاة شاشة OLED المدمجة في القاعدة */
+        .oled-screen-box {
+            background: #000000;
+            border: 8px solid #334155;
+            border-radius: 16px;
+            padding: 2rem;
+            font-family: 'Courier New', Courier, monospace;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+            position: relative;
+        }
+
+        .oled-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed #334155;
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--secondary-color);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .oled-readings {
+            font-size: 1.6rem;
+            color: #38bdf8;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* محاكاة تطبيق الهاتف */
+        .app-preview {
+            background: var(--white);
+            color: var(--text-dark);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .camera-feed {
+            background: #0f172a;
+            color: var(--white);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .live-badge {
+            background: #ef4444;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .metric-box {
+            background: var(--light-bg);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .metric-box span {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .metric-box strong {
+            font-size: 1.4rem;
+            color: var(--dark-bg);
+        }
+
+        /* التذييل */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* التجاوب مع الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .hero, .demo-container {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- القائمة العلوية -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-kaaba"></i> BeeSmartest
+            </a>
+            <ul class="nav-links">
+                <li><a href="#features">مميزات القاعدة</a></li>
+                <li><a href="#live-demo">لوحة التحكم الحية</a></li>
+                <li><a href="#order">اطلب الآن</a></li>
+            </ul>
+            <a href="#order" class="btn-main">احجز قاعدتك الذكية</a>
+        </nav>
+    </header>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>الجيل الجديد من <span>قواعد خلايا النحل الذكية</span></h1>
+            <p>
+                قاعدة خشبية متطورة مزودة بفتحة سروح مدمجة، كاميرا مراقبة أمامية في الوسط، حساسات وزن دقيقة (Load Cells)، ومستشعرات حرارة ورطوبة تعمل بالطاقة الشمسية وترفع البيانات مباشرة إلى هاتفك بدون أي أسلاك ظاهرة.
+            </p>
+            <div style="display: flex; gap: 1rem;">
+                <a href="#live-demo" class="btn-main">جرب المحاكاة الحية</a>
+            </div>
+        </div>
+        <div class="hero-image-box">
+            <!-- ضع مسار الصورة التي قمت بتحميلها هنا بدلاً من الرابط المؤقت -->
+            <img src="beehive.jpg" alt="صورة صندوق وقاعدة النحل الذكية" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'padding: 2rem; text-align: center; color: #475569;\'><i class=\'fa-solid fa-image\' style=\'font-size: 4rem; margin-bottom: 1rem; color: #f59e0b;\'></i><p><strong>ملاحظة:</strong> لعرض صورتك هنا، احفظ الصورة التي صممناها باسم <code>beehive.jpg</code> في نفس مجلد هذا الملف.</p></div>';">
+        </div>
+    </section>
+
+    <!-- قسم المميزات -->
+    <section id="features" class="features">
+        <div class="section-title">
+            <h2>تصميم هندسي متكامل في قاعدة واحدة</h2>
+            <p>كل ما يحتاجه النحال العصري لمراقبة صحة وإنتاجية الخلية عن بُعد</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-camera"></i></div>
+                <h3>كاميرا أمامية فوق فتحة السروح</h3>
+                <p>مثبتة في منتصف القاعدة مباشرة فوق المدخل لمراقبة نشاط النحل السارح، كشف التطريد، ورصد الآفات مثل دبور البلح.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-weight-scale"></i></div>
+                <h3>حساسات ميزان مدمجة (Load Cells)</h3>
+                <p>خلايا وزن معدنية مثبتة في زوايا القاعدة من الأسفل لقياس وزن العسل والمخزون الغذائي بدقة عالية على مدار الساعة.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-temperature-half"></i></div>
+                <h3>حساسات حرارة ورطوبة</h3>
+                <p>مستشعرات داخلية دقيقة لمتابعة مناخ الحضنة والتأكد من استقرار درجة الحرارة والرطوبة داخل الصندوق.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-solar-panel"></i></div>
+                <h3>لوحة شمسية مدمجة</h3>
+                <p>مثبتة على جانب القاعدة لتزويد النظام، الحساسات، والكاميرا بالطاقة المستمرة دون الحاجة لتغيير البطاريات.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-tv"></i></div>
+                <h3>شاشة OLED جانبية</h3>
+                <p>شاشة رقمية صغيرة مدمجة في جانب القاعدة تعرض القراءات الفورية (الحرارة، الرطوبة، الوزن) عند فحص المنحل ميدانياً.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                <h3>بدون أسلاك ظاهرة + تطبيق ذكي</h3>
+                <p>توصيلات داخلية مخفية بالكامل لحماية النظام من العوامل الجوية، مع رفع فوري للبيانات والرسوم البيانية عبر الـ Wi-Fi إلى هاتفك.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المحاكاة الحية -->
+    <section id="live-demo" class="live-demo">
+        <div class="section-title">
+            <h2>معاينة حية لنظام المراقبة</h2>
+            <p>محاكاة تفاعلية للقراءات كما تظهر في شاشة القاعدة وتطبيق الهاتف الذكي</p>
+        </div>
+
+        <div class="demo-container">
+            <!-- شاشة القاعدة الجانبية -->
+            <div>
+                <h3 style="margin-bottom: 1rem; color: #f59e0b;"><i class="fa-solid fa-microchip"></i> شاشة القاعدة (OLED Screen)</h3>
+                <div class="oled-screen-box">
+                    <div class="oled-header">
+                        <span><i class="fa-solid fa-wifi"></i> Wi-Fi Connected</span>
+                        <div>
+                            <span style="font-size: 0.8rem; margin-left: 8px; color: #10b981;">Solar Charging</span>
+                            <span class="status-dot"></span>
+                        </div>
+                    </div>
+                    <div class="oled-readings">
+                        <div>Temp: <span id="oled-temp">34.2</span>°C</div>
+                        <div>Hum : <span id="oled-hum">61.2</span>%</div>
+                        <div>Weight: <span id="oled-weight">24.5</span> kg</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- شاشة تطبيق الهاتف -->
+            <div class="app-preview">
+                <div class="app-header">
+                    <div>
+                        <h3 style="font-size: 1.2rem;">تطبيق مراقبة خلايا النحل</h3>
+                        <small style="color: var(--text-muted);">خلية رقم #01 - متصل الآن</small>
+                    </div>
+                    <i class="fa-solid fa-battery-full" style="color: var(--secondary-color); font-size: 1.4rem;"></i>
+                </div>
+
+                <div class="camera-feed">
+                    <div>
+                        <i class="fa-solid fa-video" style="margin-left: 8px; color: var(--primary-color);"></i>
+                        <span>كاميرا فتحة السروح (الوسط)</span>
+                    </div>
+                    <span class="live-badge">مباشر LIVE</span>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <span>درجة الحرارة</span>
+                        <strong id="app-temp">34.2°C</strong>
+                    </div>
+                    <div class="metric-box">
+                        <span>نسبة الرطوبة</span>
+                        <strong id="app-hum">61.2%</strong>
+                    </div>
+                    <div class="metric-box">
+                        <span>الوزن الحالي</span>
+                        <strong id="app-weight">24.5 كغ</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- التذييل -->
+    <footer id="order">
+        <h3 style="color: var(--white); margin-bottom: 1rem;">هل أنت مستعد لتطوير منحلك؟</h3>
+        <p style="margin-bottom: 1.5rem;">تواصل معنا لطلب القاعدة الذكية أو لتنفيذ المشروع حسب مقاسات خلاياك</p>
+        <button class="btn-main" onclick="alert('شكراً لاهتمامك! يمكنك ربط هذا الزر بنموذج تواصل أو رقم واتساب خاص بك.')">
+            <i class="fa-brands fa-whatsapp"></i> تواصل معنا للطلب
+        </button>
+        <p style="margin-top: 2rem; font-size: 0.85rem;">جميع الحقوق محفوظة &copy; 2026 BeeSmartest - تقنيات تربية النحل الذكية</p>
+    </footer>
+
+    <!-- كود JavaScript لمحاكاة تغير البيانات الحية -->
+    <script>
+        function updateLiveReadings() {
+            // توليد تغيرات طفيفة لمحاكاة الحساسات الحقيقية
+            const baseTemp = 34.2;
+            const baseHum = 61.2;
+            const baseWeight = 24.5;
+
+            const newTemp = (baseTemp + (Math.random() * 0.4 - 0.2)).toFixed(1);
+            const newHum = (baseHum + (Math.random() * 0.6 - 0.3)).toFixed(1);
+            const newWeight = (baseWeight + (Math.random() * 0.04 - 0.02)).toFixed(2);
+
+            // تحديث شاشة OLED
+            document.getElementById('oled-temp').innerText = newTemp;
+            document.getElementById('oled-hum').innerText = newHum;
+            document.getElementById('oled-weight').innerText = newWeight;
+
+            // تحديث التطبيق
+            document.getElementById('app-temp').innerText = newTemp + '°C';
+            document.getElementById('app-hum').innerText = newHum + '%';
+            document.getElementById('app-weight').innerText = newWeight + ' كغ';
+        }
+
+        // تحديث القراءات كل 3 ثوانٍ
+        setInterval(updateLiveReadings, 3000);
+    </script>
+</body>
+</html>
